@@ -1,0 +1,8 @@
+{
+	"username": null,
+	"password": null,
+	"protocol": "ftp",
+	"host": null,
+	"port": 22,
+	"command": "glob -d mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 && exit"
+}

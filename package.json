@@ -1,0 +1,46 @@
+{
+	"name": "grunt-ftpress",
+	"description": "Grunt enhanced file transfer protocol with ENV support",
+	"version": "1.0.0-beta.1",
+	"license": "GPL-3.0",
+	"keywords":
+	[
+		"ftp",
+		"ftps",
+		"sftp",
+		"lftp",
+		"gruntplugin"
+	],
+	"author":
+	{
+		"name": "Henry Ruhs",
+		"url": "https://redaxmedia.com"
+	},
+	"bugs":
+	{
+		"url": "https://github.com/redaxmedia/grunt-ftpress/issues"
+	},
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/redaxmedia/grunt-ftpress.git"
+	},
+	"dependencies":
+	{
+		"extend": "3.0.1",
+		"ftps": "1.1.0",
+		"url-parse": "1.4.0"
+	},
+	"devDependencies":
+	{
+		"chai": "4.1.2",
+		"eslint": "4.19.1",
+		"grunt": "1.0.2",
+		"mocha": "5.1.1"
+	},
+	"scripts":
+	{
+		"lint": "eslint tasks tests",
+		"test": "mocha tests/*Test.js"
+	}
+}
