@@ -64,7 +64,7 @@ function _process(source, target)
 function init()
 {
 	const done = this.async;
-	const urlParse = new UrlParse(process.env.FTPRESS_URL);
+	const urlParse = new UrlParse(grunt.option('url'));
 
 	optionArray = extend(optionArray, this.options(), urlParse && urlParse.hostname ?
 	{

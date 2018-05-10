@@ -1,7 +1,7 @@
 Grunt Ftpress
 =============
 
-> Grunt enhanced file transfer protocol with ENV support.
+> Grunt enhanced file transfer protocol.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/grunt-ftpress.svg)](https://travis-ci.org/redaxmedia/grunt-ftpress)
 [![NPM Version](https://img.shields.io/npm/v/grunt-ftpress.svg)](https://npmjs.com/package/grunt-ftpress)
@@ -64,8 +64,8 @@ Run the task:
 grunt ftpress
 ```
 
-Run the task using the `FTPRESS_URL` variable:
+Run the task using the `url` option:
 
 ```
-FTPRESS_URL=sftp://username:password@host:22 grunt ftpress
+grunt ftpress --url=sftp://username:password@host:22
 ```
