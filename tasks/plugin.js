@@ -66,7 +66,7 @@ function init()
 	const done = this.async;
 	const urlParse = new UrlParse(process.env.FTPRESS_URL);
 
-	optionArray = extend(optionArray, this.options(), urlParse ?
+	optionArray = extend(optionArray, this.options(), urlParse && urlParse.hostname ?
 	{
 		username: urlParse.username,
 		password: urlParse.password,
