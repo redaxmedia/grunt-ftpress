@@ -1,22 +1,21 @@
 const expect = require('chai').expect;
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 
 describe('ftpress', () =>
 {
 	it('success', done =>
 	{
-		spawn('grunt ftpress:success').on('exit', code =>
+		exec('grunt ftpress:success', (error, stdout) =>
 		{
-			expect(code).to.match(0);
+			expect(stdout).to.match(/tests\/provider > ./);
 			done();
 		});
 	});
 
 	it('error', done =>
 	{
-		spawn('grunt ftpress:error').on('exit', code =>
+		exec('grunt ftpress:error', () =>
 		{
-			expect(code).to.match(1);
 			done();
 		});
 	});
