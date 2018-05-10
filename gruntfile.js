@@ -23,10 +23,6 @@ module.exports = grunt =>
 					'tests/invalid'
 				],
 				dest: '.'
-			},
-			options:
-			{
-				debug: true
 			}
 		}
 	});
