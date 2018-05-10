@@ -11,4 +11,4 @@ install:
 
 script:
 - npm run lint
-- $FTPRESS_URL npm test
+- npm test
