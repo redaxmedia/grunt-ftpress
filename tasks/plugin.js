@@ -27,7 +27,8 @@ function _transfer(source, target)
 		optionArray.port ? '-p' : null,
 		optionArray.port ? optionArray.protocol : null,
 		'-e',
-		optionArray.command.replace('{SOURCE}', source).replace('{TARGET}', target)
+		optionArray.command.replace('{SOURCE}', source).replace('{TARGET}', target),
+		optionArray.debug ? '-d' : null
 	]);
 }
 
@@ -44,9 +45,13 @@ function _process(source, target)
 {
 	const transfer = _transfer(source, target);
 
+	transfer.stderr.on('data', data =>
+	{
+		grunt.log.write(data);
+	});
 	transfer.on('exit', code =>
 	{
-		return code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.log.error(source + ' !== ' + target);
+		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.log.error(source + ' !== ' + target);
 	});
 }
 
@@ -59,32 +64,25 @@ function _process(source, target)
 function init()
 {
 	const done = this.async;
-	const url = new UrlParse(process.env.FTPRESS_URL);
+	const urlParse = new UrlParse(process.env.FTPRESS_URL);
 
-	optionArray = extend(optionArray, this.options(), url ?
+	optionArray = extend(optionArray, this.options(), urlParse ?
 	{
-		username: url.username,
-		password: url.password,
-		protocol: url.protocol.replace(':', ''),
-		host: url.hostname,
-		port: url.port
+		username: urlParse.username,
+		password: urlParse.password,
+		protocol: urlParse.protocol.replace(':', ''),
+		host: urlParse.hostname,
+		port: urlParse.port
 	} : {});
 
 	/* process files */
 
 	this.files.forEach(fileValue =>
 	{
-		if (fileValue.dest)
+		fileValue.src.forEach(sourceValue =>
 		{
-			_process(fileValue.src, fileValue.dest);
-		}
-		else
-		{
-			fileValue.src.forEach(sourceValue =>
-			{
-				_process(sourceValue, sourceValue);
-			});
-		}
+			_process(sourceValue, fileValue.dest ? fileValue.dest : sourceValue);
+		});
 	});
 	done();
 }

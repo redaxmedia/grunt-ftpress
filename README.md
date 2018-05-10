@@ -49,8 +49,9 @@ grunt.initConfig(
 				password: null,
  				protocol: 'ftp',
 				host: null,
-				port: 22,
-				command: 'glob -d mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 && exit'
+				port: 21,
+				command: 'glob -d mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 && exit',
+				debug: false
 			}
 		}
 	}
