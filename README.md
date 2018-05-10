@@ -1,7 +1,7 @@
 Grunt Ftpress
 =============
 
-> Grunt enhanced file transfer protocol.
+> Grunt enhanced file transfer with speed in mind.
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/grunt-ftpress.svg)](https://travis-ci.org/redaxmedia/grunt-ftpress)
 [![NPM Version](https://img.shields.io/npm/v/grunt-ftpress.svg)](https://npmjs.com/package/grunt-ftpress)
