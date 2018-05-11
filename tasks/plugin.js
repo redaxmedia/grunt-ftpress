@@ -43,7 +43,17 @@ function _transfer(source, target)
 	if (optionArray.debug)
 	{
 		transferArray.push('-d');
-		transferArray.forEach(spawnValue => grunt.log.writeln(spawnValue));
+		transferArray.forEach(spawnValue =>
+		{
+			if (spawnValue.toString().indexOf(optionArray.username + ':' + optionArray.password) > -1)
+			{
+				grunt.log.writeln(optionArray.username + ':*****');
+			}
+			else
+			{
+				grunt.log.writeln(spawnValue);
+			}
+		});
 	}
 	return spawn('lftp', transferArray);
 }
