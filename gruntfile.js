@@ -23,6 +23,10 @@ module.exports = grunt =>
 					'tests/invalid'
 				],
 				dest: '.'
+			},
+			options:
+			{
+				url: grunt.option('url')
 			}
 		}
 	});

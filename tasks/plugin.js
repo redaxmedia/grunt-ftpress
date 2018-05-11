@@ -33,6 +33,30 @@ function _transfer(source, target)
 }
 
 /**
+ * parse
+ *
+ * @since 1.0.0
+ *
+ * @param url string
+ *
+ * @return object
+ */
+
+function _parse(url)
+{
+	const urlParse = new UrlParse(url);
+
+	return urlParse && urlParse.hostname ?
+	{
+		username: urlParse.username,
+		password: urlParse.password,
+		protocol: urlParse.protocol.replace(':', ''),
+		host: urlParse.hostname,
+		port: urlParse.port
+	} : {};
+}
+
+/**
  * process
  *
  * @since 1.0.0
@@ -64,16 +88,9 @@ function _process(source, target)
 function init()
 {
 	const done = this.async;
-	const urlParse = new UrlParse(grunt.option('url'));
 
-	optionArray = extend(optionArray, this.options(), urlParse && urlParse.hostname ?
-	{
-		username: urlParse.username,
-		password: urlParse.password,
-		protocol: urlParse.protocol.replace(':', ''),
-		host: urlParse.hostname,
-		port: urlParse.port
-	} : {});
+	optionArray = extend(optionArray, this.options());
+    optionArray = extend(optionArray, _parse(optionArray.url));
 
 	/* process files */
 
