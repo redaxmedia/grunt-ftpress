@@ -19,17 +19,57 @@ let optionArray = require('../option.json');
 
 function _transfer(source, target)
 {
-	return spawn('lftp',
-	[
-		optionArray.protocol + '://' + optionArray.host,
-		'-u',
-		optionArray.username + ':' + optionArray.password,
-		optionArray.port ? '-p' : null,
-		optionArray.port ? optionArray.protocol : null,
-		'-e',
-		optionArray.command.replace('{SOURCE}', source).replace('{TARGET}', target),
-		optionArray.debug ? '-d' : null
-	]);
+	const transferArray = [];
+
+	if (optionArray.protocol && optionArray.host)
+	{
+		transferArray.push(optionArray.protocol + '://' + optionArray.host);
+	}
+	if (optionArray.username && optionArray.password)
+	{
+		transferArray.push('-u');
+		transferArray.push(optionArray.username + ':' + optionArray.password);
+	}
+	if (optionArray.port)
+	{
+		transferArray.push('-p');
+		transferArray.push(optionArray.port);
+	}
+	if (optionArray.command)
+	{
+		transferArray.push('-e');
+		transferArray.push(optionArray.command.replace('{SOURCE}', source).replace('{TARGET}', target));
+	}
+	if (optionArray.debug)
+	{
+		transferArray.push('-d');
+		transferArray.forEach(spawnValue => grunt.log.writeln(spawnValue));
+	}
+	return spawn('lftp', transferArray);
+}
+
+/**
+ * parse
+ *
+ * @since 1.0.0
+ *
+ * @param url string
+ *
+ * @return object
+ */
+
+function _parse(url)
+{
+	const urlParse = new UrlParse(url);
+
+	return urlParse && urlParse.hostname ?
+	{
+		username: urlParse.username,
+		password: urlParse.password,
+		protocol: urlParse.protocol.replace(':', ''),
+		host: urlParse.hostname,
+		port: urlParse.port
+	} : {};
 }
 
 /**
@@ -47,7 +87,7 @@ function _process(source, target)
 
 	transfer.stderr.on('data', data =>
 	{
-		grunt.log.write(data);
+		grunt.log.writeln(data);
 	});
 	transfer.on('exit', code =>
 	{
@@ -64,16 +104,9 @@ function _process(source, target)
 function init()
 {
 	const done = this.async;
-	const urlParse = new UrlParse(grunt.option('url'));
 
-	optionArray = extend(optionArray, this.options(), urlParse && urlParse.hostname ?
-	{
-		username: urlParse.username,
-		password: urlParse.password,
-		protocol: urlParse.protocol.replace(':', ''),
-		host: urlParse.hostname,
-		port: urlParse.port
-	} : {});
+	optionArray = extend(optionArray, this.options());
+	optionArray = extend(optionArray, _parse(optionArray.url));
 
 	/* process files */
 

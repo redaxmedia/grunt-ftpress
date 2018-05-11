@@ -45,6 +45,7 @@ grunt.initConfig(
 			dest: '.',
 			options:
 			{
+				url: null,
 				username: null,
 				password: null,
  				protocol: 'ftp',
@@ -64,8 +65,3 @@ Run the task:
 grunt ftpress
 ```
 
-Run the task using the `url` option:
-
-```
-grunt ftpress --url=sftp://username:password@host:22
-```
