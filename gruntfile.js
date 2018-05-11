@@ -28,8 +28,10 @@ module.exports = grunt =>
 			{
                 username: 'demo-user',
                 password: 'demo-user',
+				protocol: 'sftp',
                 host: 'demo.wftpserver.com',
-                command: 'set ssl:verify-certificate false; mirror {SOURCE} {TARGET} --reverse --delete-first --dry-run; exit',
+				port: 2222,
+                command: 'set sftp:auto-confirm yes; mirror {SOURCE} {TARGET} --reverse --delete-first --dry-run; exit',
 				debug: true
 			}
 		}
