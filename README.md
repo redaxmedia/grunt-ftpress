@@ -48,7 +48,7 @@ grunt.initConfig(
 				url: null,
 				username: null,
 				password: null,
- 				protocol: 'ftp',
+				protocol: 'ftp',
 				host: null,
 				port: 21,
 				command: 'mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10; exit',
