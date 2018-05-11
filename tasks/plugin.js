@@ -91,7 +91,7 @@ function _process(source, target)
 	});
 	transfer.on('exit', code =>
 	{
-		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.log.error(source + ' > ' + target);
+		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.log.error(source + ' ==! ' + target);
 	});
 }
 
