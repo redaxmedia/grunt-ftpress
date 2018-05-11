@@ -122,7 +122,7 @@ function init()
 
 	this.files.forEach(fileValue =>
 	{
-		fileValue.src.forEach(sourceValue =>
+		fileValue.orig.src.forEach(sourceValue =>
 		{
 			_process(sourceValue, fileValue.dest ? fileValue.dest : sourceValue);
 		});
