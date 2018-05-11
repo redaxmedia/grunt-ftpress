@@ -14,7 +14,7 @@ module.exports = grunt =>
 				[
 					'tests/provider'
 				],
-				dest: 'tests/provider'
+				dest: '.'
 			},
 			error:
 			{
@@ -22,16 +22,14 @@ module.exports = grunt =>
 				[
 					'tests/invalid'
 				],
-				dest: 'tests/invalid'
+				dest: '.'
 			},
 			options:
 			{
                 username: 'demo-user',
                 password: 'demo-user',
-                protocol: 'ftp',
                 host: 'demo.wftpserver.com',
-                port: 21,
-                command: 'set ssl:verify-certificate false; mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10; exit',
+                command: 'set ssl:verify-certificate false; mirror {SOURCE} {TARGET} --reverse --delete-first --dry-run; exit',
 				debug: true
 			}
 		}
