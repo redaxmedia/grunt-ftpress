@@ -7,7 +7,9 @@ node_js:
 - 9
 
 install:
+- sudo apt-get install lftp
 - npm install
 
 script:
 - npm run lint
+- npm test

@@ -7,10 +7,11 @@ describe('ftpress', () =>
 	{
 		exec('grunt ftpress:success', (error, stdout) =>
 		{
-			expect(stdout).to.match(/tests\/provider > ./);
+			expect(stdout).to.match(/tests\/provider > tests\/provider/);
 			done();
 		});
-	});
+	})
+	.timeout(10000);
 
 	it('error', done =>
 	{
