@@ -45,7 +45,7 @@ grunt.initConfig(
 			dest: '.',
 			options:
 			{
-			    url: null,
+				url: null,
 				username: null,
 				password: null,
  				protocol: 'ftp',

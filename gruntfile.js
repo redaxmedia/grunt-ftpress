@@ -26,7 +26,8 @@ module.exports = grunt =>
 			},
 			options:
 			{
-				url: grunt.option('url')
+				url: grunt.option('url'),
+				debug: true
 			}
 		}
 	});
