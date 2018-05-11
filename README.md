@@ -40,7 +40,7 @@ grunt.initConfig(
 		{
 			src:
 			[
-				'.'
+				'build'
 			],
 			dest: '.',
 			options:
