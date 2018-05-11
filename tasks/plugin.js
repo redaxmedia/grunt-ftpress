@@ -19,7 +19,7 @@ let optionArray = require('../option.json');
 
 function _transfer(source, target)
 {
-	const transferArray = [];
+	let transferArray = [];
 
 	if (optionArray.protocol && optionArray.host)
 	{
