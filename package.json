@@ -28,15 +28,15 @@
 	"dependencies":
 	{
 		"extend": "3.0.1",
-		"url-parse": "1.4.0"
+		"url-parse": "1.4.1"
 	},
 	"devDependencies":
 	{
 		"chai": "4.1.2",
-		"eslint": "4.19.1",
-		"eslint-config-redaxmedia": "https://github.com/redaxmedia/eslint-config-redaxmedia.git",
-		"grunt": "1.0.2",
-		"mocha": "5.1.1"
+		"eslint": "5.0.1",
+		"eslint-config-redaxmedia": "1.0",
+		"grunt": "1.0.3",
+		"mocha": "5.2.0"
 	},
 	"scripts":
 	{
