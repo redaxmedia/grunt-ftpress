@@ -63,6 +63,19 @@ grunt.initConfig(
 }
 ```
 
+Zero downtime pattern:
+
+```js
+command:
+[
+	'mirror {SOURCE} {TARGET}-new-{TIMESTAMP} --reverse --delete-first',
+	'mv {TARGET} {TARGET}-old-{TIMESTAMP}',
+	'mv {TARGET}-new-{TIMESTAMP} {TARGET}',
+	'rm -rf {TARGET}-old-{TIMESTAMP}',
+	'exit'
+]
+```
+
 Run the task:
 
 ```
