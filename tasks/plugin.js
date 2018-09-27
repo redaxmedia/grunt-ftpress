@@ -118,6 +118,13 @@ function init()
 	optionArray = extend(optionArray, this.options());
 	optionArray = extend(optionArray, _parse(optionArray.url));
 
+	/* normalize command */
+
+	if (typeof optionArray.command === 'object')
+	{
+		optionArray.command = optionArray.command.join(';');
+	}
+
 	/* process files */
 
 	this.files.forEach(fileValue =>

@@ -31,7 +31,11 @@ module.exports = grunt =>
 				protocol: 'sftp',
 				host: 'demo.wftpserver.com',
 				port: 2222,
-				command: 'set sftp:auto-confirm yes; mirror {SOURCE} {TARGET} --reverse --delete-first --dry-run; exit',
+				command:
+				[
+					'mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10 --dry-run',
+					'exit'
+				],
 				debug: true
 			}
 		}
