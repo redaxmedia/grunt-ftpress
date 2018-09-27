@@ -38,7 +38,7 @@ function _transfer(source, target)
 	if (optionArray.command)
 	{
 		transferArray.push('-e');
-		transferArray.push(optionArray.command.replace('{SOURCE}', source).replace('{TARGET}', target));
+		transferArray.push(optionArray.command.replace(new RegExp('{SOURCE}', 'g'), source).replace(new RegExp('{TARGET}', 'g'), target));
 	}
 	if (optionArray.debug)
 	{
@@ -101,7 +101,7 @@ function _process(source, target)
 	});
 	transfer.on('exit', code =>
 	{
-		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.log.error(source + ' ==! ' + target);
+		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.fail.warn(source + ' ==! ' + target);
 	});
 }
 
