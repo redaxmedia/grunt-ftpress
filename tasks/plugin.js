@@ -20,6 +20,7 @@ let optionArray = require('../option.json');
 function _transfer(source, target)
 {
 	const transferArray = [];
+	const timestamp = new Date().getTime();
 
 	if (optionArray.protocol && optionArray.host)
 	{
@@ -38,7 +39,7 @@ function _transfer(source, target)
 	if (optionArray.command)
 	{
 		transferArray.push('-e');
-		transferArray.push(optionArray.command.replace(new RegExp('{SOURCE}', 'g'), source).replace(new RegExp('{TARGET}', 'g'), target));
+		transferArray.push(optionArray.command.replace(new RegExp('{SOURCE}', 'g'), source).replace(new RegExp('{TARGET}', 'g'), target).replace(new RegExp('{TIMESTAMP}', 'g'), timestamp));
 	}
 	if (optionArray.debug)
 	{
