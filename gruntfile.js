@@ -26,14 +26,14 @@ module.exports = grunt =>
 			},
 			options:
 			{
-				username: 'demo-user',
-				password: 'demo-user',
+				username: 'demo',
+				password: 'password',
 				protocol: 'sftp',
-				host: 'demo.wftpserver.com',
-				port: 2222,
+				host: 'test.rebex.net',
+				port: 22,
 				command:
 				[
-					'mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10 --dry-run',
+					'mirror {SOURCE} {TARGET} --reverse --dry-run',
 					'exit'
 				],
 				debug: true
