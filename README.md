@@ -56,7 +56,8 @@ grunt.initConfig(
 					'mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10',
 					'exit'
 				],
-				debug: false
+				debug: false,
+				verbose: false
 			}
 		}
 	}

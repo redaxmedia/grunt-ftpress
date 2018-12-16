@@ -96,6 +96,13 @@ function _process(source, target)
 {
 	const transfer = _transfer(source, target);
 
+	if (optionArray.verbose)
+	{
+		transfer.stdout.on('data', data =>
+		{
+			grunt.log.writeln(data);
+		});
+	}
 	transfer.stderr.on('data', data =>
 	{
 		grunt.log.writeln(data);
