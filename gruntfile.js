@@ -33,6 +33,7 @@ module.exports = grunt =>
 				port: 22,
 				command:
 				[
+					'set sftp:auto-confirm yes',
 					'mirror {SOURCE} {TARGET} --reverse --dry-run',
 					'exit'
 				],
