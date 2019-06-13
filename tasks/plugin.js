@@ -20,7 +20,6 @@ let optionArray = require('../option.json');
 function _transfer(source, target)
 {
 	const transferArray = [];
-	const timestamp = new Date().getTime();
 
 	if (optionArray.protocol && optionArray.host)
 	{
@@ -28,18 +27,15 @@ function _transfer(source, target)
 	}
 	if (optionArray.username && optionArray.password)
 	{
-		transferArray.push('-u');
-		transferArray.push(optionArray.username + ':' + optionArray.password);
+		transferArray.push('-u', optionArray.username + ':' + optionArray.password);
 	}
 	if (optionArray.port)
 	{
-		transferArray.push('-p');
-		transferArray.push(optionArray.port);
+		transferArray.push('-p', optionArray.port);
 	}
 	if (optionArray.command)
 	{
-		transferArray.push('-e');
-		transferArray.push(optionArray.command.replace(new RegExp('{SOURCE}', 'g'), source).replace(new RegExp('{TARGET}', 'g'), target).replace(new RegExp('{TIMESTAMP}', 'g'), timestamp));
+		transferArray.push('-e', _parseCommand(optionArray.command, source, target));
 	}
 	if (optionArray.debug)
 	{
@@ -60,7 +56,29 @@ function _transfer(source, target)
 }
 
 /**
- * parse
+ * parse command
+ *
+ * @since 1.3.0
+ *
+ * @param command string
+ * @param source string
+ * @param target string
+ *
+ * @return object
+ */
+
+function _parseCommand(command, source, target)
+{
+	const timestamp = new Date().getTime();
+
+	return command
+		.replace(new RegExp('{SOURCE}', 'g'), source)
+		.replace(new RegExp('{TARGET}', 'g'), target)
+		.replace(new RegExp('{TIMESTAMP}', 'g'), timestamp)
+}
+
+/**
+ * parse url
  *
  * @since 1.0.0
  *
@@ -69,7 +87,7 @@ function _transfer(source, target)
  * @return object
  */
 
-function _parse(url)
+function _parseUrl(url)
 {
 	const urlParse = new UrlParse(url);
 
@@ -124,7 +142,7 @@ function init()
 	const done = this.async;
 
 	optionArray = extend(optionArray, this.options());
-	optionArray = extend(optionArray, _parse(optionArray.url));
+	optionArray = extend(optionArray, _parseUrl(optionArray.url));
 
 	/* normalize command */
 
