@@ -37,7 +37,8 @@ module.exports = grunt =>
 					'mirror {SOURCE} {TARGET} --reverse --dry-run',
 					'exit'
 				],
-				debug: true
+				debug: true,
+				verbose: true
 			}
 		}
 	});
