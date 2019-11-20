@@ -33,14 +33,15 @@
 	"devDependencies":
 	{
 		"chai": "4.2.0",
-		"eslint": "6.3.0",
-		"eslint-config-redaxmedia": "1.1.0",
+		"eslint": "6.6.0",
+		"eslint-config-redaxmedia": "1.2.0",
 		"grunt": "1.0.4",
-		"mocha": "6.2.0"
+		"mocha": "6.2.2"
 	},
 	"scripts":
 	{
 		"lint": "eslint tasks tests",
+		"fix": "eslint tasks tests --fix",
 		"test": "mocha tests/*Test.js"
 	}
 }
