@@ -74,7 +74,7 @@ function _parseCommand(command, source, target)
 	return command
 		.replace(new RegExp('{SOURCE}', 'g'), source)
 		.replace(new RegExp('{TARGET}', 'g'), target)
-		.replace(new RegExp('{TIMESTAMP}', 'g'), timestamp)
+		.replace(new RegExp('{TIMESTAMP}', 'g'), timestamp);
 }
 
 /**
