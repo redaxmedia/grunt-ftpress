@@ -1,5 +1,4 @@
 const grunt = require('grunt');
-const extend = require('extend');
 const UrlParse = require('url-parse');
 const spawn = require('child_process').spawn;
 const packageArray = require('../package.json');
@@ -141,8 +140,12 @@ function init()
 {
 	const done = this.async;
 
-	optionArray = extend(optionArray, this.options());
-	optionArray = extend(optionArray, _parseUrl(optionArray.url));
+	optionArray =
+	{
+		...optionArray,
+		...this.options(),
+		..._parseUrl(this.options().url ? this.options().url : optionArray.url)
+	};
 
 	/* normalize command */
 
