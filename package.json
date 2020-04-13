@@ -27,6 +27,7 @@
 	},
 	"dependencies":
 	{
+		"utility-redaxmedia": "1.0.0",
 		"url-parse": "1.4.7"
 	},
 	"devDependencies":
