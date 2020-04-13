@@ -61,7 +61,7 @@ grunt.initConfig(
 			}
 		}
 	}
-}
+});
 ```
 
 Zero downtime pattern:
