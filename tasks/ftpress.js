@@ -126,7 +126,7 @@ function _process(source, target)
 	{
 		grunt.log.writeln(data);
 	});
-	transferProcess.on('exit', code =>
+	transferProcess.on('close', code =>
 	{
 		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.fail.warn(source + ' !== ' + target);
 	});
