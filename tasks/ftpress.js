@@ -1,9 +1,9 @@
 const grunt = require('grunt');
 const urlParse = require('url-parse');
 const spawn = require('child_process').spawn;
+const option = require('utility-redaxmedia').option(__dirname + '/../option.json');
+const helper = require('utility-redaxmedia').helper;
 const packageObject = require('../package.json');
-
-let optionObject = require('../option.json');
 
 /**
  * transfer
@@ -20,30 +20,30 @@ function _transfer(source, target)
 {
 	const transferArray = [];
 
-	if (optionObject.protocol && optionObject.host)
+	if (option.get('protocol') && option.get('host'))
 	{
-		transferArray.push(optionObject.protocol + '://' + optionObject.host);
+		transferArray.push(option.get('protocol') + '://' + option.get('host'));
 	}
-	if (optionObject.username && optionObject.password)
+	if (option.get('username') && option.get('password'))
 	{
-		transferArray.push('-u', optionObject.username + ':' + optionObject.password);
+		transferArray.push('-u', option.get('username') + ':' + option.get('password'));
 	}
-	if (optionObject.port)
+	if (option.get('port'))
 	{
-		transferArray.push('-p', optionObject.port);
+		transferArray.push('-p', option.get('port'));
 	}
-	if (optionObject.command)
+	if (option.get('command'))
 	{
-		transferArray.push('-e', _parseCommand(optionObject.command, source, target));
+		transferArray.push('-e', _parseCommand(option.get('command'), source, target));
 	}
-	if (optionObject.debug)
+	if (option.get('debug'))
 	{
 		transferArray.push('-d');
 		transferArray.forEach(spawnValue =>
 		{
-			if (spawnValue.toString().indexOf(optionObject.username + ':' + optionObject.password) > -1)
+			if (spawnValue.toString().indexOf(option.get('username') + ':' + option.get('password')) > -1)
 			{
-				grunt.log.writeln(optionObject.username + ':' + '*'.repeat(optionObject.password.length));
+				grunt.log.writeln(option.get('username') + ':' + '*'.repeat(option.get('password').length));
 			}
 			else
 			{
@@ -115,7 +115,7 @@ function _process(source, target)
 {
 	const transferProcess = _transfer(source, target);
 
-	if (optionObject.verbose)
+	if (option.get('verbose'))
 	{
 		transferProcess.stdout.on('data', data =>
 		{
@@ -142,21 +142,20 @@ function _process(source, target)
 
 function init()
 {
-	const urlObject = _parseUrl(this.options().url ? this.options().url : optionObject.url);
+	const urlObject = _parseUrl(this.options().url ? this.options().url : option.get('url'));
 	const done = this.async;
 
-	optionObject =
+	option.init(
 	{
-		...optionObject,
 		...this.options(),
-		...urlObject
-	};
+		...helper.object.tidy(urlObject)
+	});
 
 	/* stringify command */
 
-	if (typeof optionObject.command === 'object')
+	if (typeof option.get('command') === 'object')
 	{
-		optionObject.command = optionObject.command.join(';');
+		option.set('command', option.get('command').join(';'));
 	}
 
 	/* process files */

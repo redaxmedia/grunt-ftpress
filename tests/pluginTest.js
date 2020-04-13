@@ -11,7 +11,7 @@ describe('ftpress', () =>
 			done();
 		});
 	})
-	.timeout(10000);
+	.timeout(5000);
 
 	it('error', done =>
 	{
