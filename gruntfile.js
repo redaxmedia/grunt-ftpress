@@ -26,11 +26,11 @@ module.exports = grunt =>
 			},
 			options:
 			{
-				username: 'demo',
-				password: 'password',
+				username: 'demo-user',
+				password: 'demo-user',
 				protocol: 'sftp',
-				host: 'test.rebex.net',
-				port: 22,
+				host: 'demo.wftpserver.com',
+				port: 2222,
 				command:
 				[
 					'set sftp:auto-confirm yes',
