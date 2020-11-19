@@ -3,7 +3,7 @@ Grunt Ftpress
 
 > Grunt enhanced file transfer with speed in mind.
 
-[![Build Status](https://img.shields.io/travis/redaxmedia/grunt-ftpress.svg)](https://travis-ci.org/redaxmedia/grunt-ftpress)
+[![Build Status](https://img.shields.io/github/workflow/status/redaxmedia/grunt-ftpress/ci.svg)](https://github.com/redaxmedia/grunt-ftpress/actions?query=workflow:ci)
 [![NPM Version](https://img.shields.io/npm/v/grunt-ftpress.svg)](https://npmjs.com/package/grunt-ftpress)
 [![Licensen](https://img.shields.io/npm/l/grunt-ftpress.svg)](https://npmjs.com/package/grunt-ftpress)
 
@@ -16,7 +16,7 @@ apt-get install lftp
 ```
 
 ```
-npm install grunt-lftpress
+npm install grunt-ftpress
 ```
 
 
