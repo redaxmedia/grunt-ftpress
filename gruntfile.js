@@ -14,7 +14,15 @@ module.exports = grunt =>
 				[
 					'tests/provider'
 				],
-				dest: '.'
+				dest: '.',
+				options:
+				{
+					command:
+					[
+						'mirror {SOURCE} {TARGET} --reverse --dry-run',
+						'exit'
+					]
+				}
 			},
 			errorFileNotFound:
 			{
