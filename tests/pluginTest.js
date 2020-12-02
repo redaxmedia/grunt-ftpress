@@ -1,23 +1,19 @@
-const expect = require('chai').expect;
 const exec = require('child_process').exec;
 
 describe('ftpress', () =>
 {
 	it('success', done =>
 	{
-		exec('grunt ftpress:success', (error, stdout) =>
-		{
-			expect(stdout).to.match(/tests\/provider > ./);
-			done();
-		});
-	})
-	.timeout(5000);
+		exec('grunt ftpress:success', error => error ? done('error') : done());
+	});
 
-	it('error', done =>
+	it('errorFileNotFound', done =>
 	{
-		exec('grunt ftpress:error', () =>
-		{
-			done();
-		});
+		exec('grunt ftpress:errorFileNotFound', error => error ? done() : done('error'));
+	});
+
+	it('errorPermissionDenied', done =>
+	{
+		exec('grunt ftpress:errorPermissionDenied', error => error ? done() : done('error'));
 	});
 });

@@ -1,9 +1,12 @@
+const os = require('os');
 const grunt = require('grunt');
 const urlParse = require('url-parse');
 const spawn = require('child_process').spawn;
 const option = require('utility-redaxmedia').option(__dirname + '/../option.json');
 const helper = require('utility-redaxmedia').helper;
 const packageObject = require('../package.json');
+
+let hasError = false;
 
 /**
  * transfer
@@ -36,20 +39,9 @@ function _transfer(source, target)
 	{
 		transferArray.push('-e', _parseCommand(option.get('command'), source, target));
 	}
-	if (option.get('debug'))
+	if (option.get('debug') || option.get('haltOnError'))
 	{
 		transferArray.push('-d');
-		transferArray.forEach(spawnValue =>
-		{
-			if (spawnValue.toString().indexOf(option.get('username') + ':' + option.get('password')) > -1)
-			{
-				grunt.log.writeln(option.get('username') + ':' + '*'.repeat(option.get('password').length));
-			}
-			else
-			{
-				grunt.log.writeln(spawnValue);
-			}
-		});
 	}
 	return spawn('lftp', transferArray);
 }
@@ -114,6 +106,7 @@ function _parseUrl(url)
 function _process(source, target)
 {
 	const transferProcess = _transfer(source, target);
+	const haltOnError = option.get('haltOnError');
 
 	if (option.get('verbose'))
 	{
@@ -124,12 +117,51 @@ function _process(source, target)
 	}
 	transferProcess.stderr.on('data', data =>
 	{
-		grunt.log.errorlns(data);
+		const dataArray = data.toString().split(os.EOL).filter(value => value);
+
+		dataArray.map(dataValue =>
+		{
+			if (_findError(dataValue))
+			{
+				hasError = true;
+				grunt.log.errorlns(dataValue);
+			}
+			else if (option.get('debug'))
+			{
+				grunt.log.writeln(dataValue);
+			}
+		});
 	});
-	transferProcess.on('close', code =>
+	transferProcess.on('close', error =>
 	{
-		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.fatal(source + ' !== ' + target);
+		haltOnError && (error || hasError) ? grunt.fatal(source + ' !== ' + target) : grunt.log.ok(source + ' > ' + target);
 	});
+}
+
+/**
+ * findError
+ *
+ * @since 1.6.0
+ *
+ * @param {string} dataValue
+ *
+ * @return {boolean}
+ */
+
+function _findError(dataValue)
+{
+	const errorArray = option.get('errorArray');
+
+	let hasError = false;
+
+	errorArray.map(error =>
+	{
+		if (dataValue.includes(error))
+		{
+			hasError = true;
+		}
+	});
+	return hasError;
 }
 
 /**

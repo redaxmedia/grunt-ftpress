@@ -16,7 +16,7 @@ module.exports = grunt =>
 				],
 				dest: '.'
 			},
-			error:
+			errorFileNotFound:
 			{
 				src:
 				[
@@ -24,21 +24,34 @@ module.exports = grunt =>
 				],
 				dest: '.'
 			},
+			errorPermissionDenied:
+			{
+				src:
+				[
+					'tests/provider'
+				],
+				dest: '.',
+				options:
+				{
+					username: 'invalid',
+					password: 'invalid'
+				}
+			},
 			options:
 			{
-				username: 'demo-user',
-				password: 'demo-user',
+				username: 'demo',
+				password: 'demo',
 				protocol: 'sftp',
 				host: 'demo.wftpserver.com',
 				port: 2222,
 				command:
 				[
-					'set sftp:auto-confirm yes',
 					'mirror {SOURCE} {TARGET} --reverse --dry-run',
 					'exit'
 				],
-				debug: true,
-				verbose: true
+				debug: false,
+				verbose: false,
+				haltOnError: true
 			}
 		}
 	});

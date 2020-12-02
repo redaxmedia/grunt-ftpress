@@ -57,7 +57,13 @@ grunt.initConfig(
 					'exit'
 				],
 				debug: false,
-				verbose: false
+				verbose: false,
+				haltOnError: false,
+				errorArray:
+				[
+					'Not connected',
+					'Permission denied'
+				]
 			}
 		}
 	}
