@@ -46,7 +46,7 @@ module.exports = grunt =>
 				port: 2222,
 				command:
 				[
-					'mirror {SOURCE} {TARGET} --reverse --dry-run',
+					'mirror {SOURCE} {TARGET} --reverse',
 					'exit'
 				],
 				debug: true,
