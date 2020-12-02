@@ -6,8 +6,6 @@ const option = require('utility-redaxmedia').option(__dirname + '/../option.json
 const helper = require('utility-redaxmedia').helper;
 const packageObject = require('../package.json');
 
-let hasError = false;
-
 /**
  * transfer
  *
@@ -123,8 +121,11 @@ function _process(source, target)
 		{
 			if (_findError(dataValue))
 			{
-				hasError = true;
 				grunt.log.errorlns(dataValue);
+				transferProcess.emit('error',
+				{
+					code: 1
+				});
 			}
 			else if (option.get('debug'))
 			{
@@ -134,7 +135,7 @@ function _process(source, target)
 	});
 	transferProcess.on('close', error =>
 	{
-		haltOnError && (error || hasError) ? grunt.fatal(source + ' !== ' + target) : grunt.log.ok(source + ' > ' + target);
+		haltOnError && error ? grunt.fatal(source + ' !== ' + target) : grunt.log.ok(source + ' > ' + target);
 	});
 }
 

@@ -15,6 +15,7 @@
 	"haltOnError": false,
 	"errorArray":
 	[
+		"Connection refused",
 		"Not connected",
 		"Permission denied"
 	]

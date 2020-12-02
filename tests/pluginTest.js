@@ -12,6 +12,11 @@ describe('ftpress', () =>
 		exec('grunt ftpress:errorFileNotFound', error => error ? done() : done('error'));
 	});
 
+	it('errorConnectionRefused', done =>
+	{
+		exec('grunt ftpress:errorConnectionRefused', error => error ? done() : done('error'));
+	});
+
 	it('errorPermissionDenied', done =>
 	{
 		exec('grunt ftpress:errorPermissionDenied', error => error ? done() : done('error'));

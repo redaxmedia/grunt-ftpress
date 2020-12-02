@@ -32,6 +32,18 @@ module.exports = grunt =>
 				],
 				dest: '.'
 			},
+			errorConnectionRefused:
+			{
+				src:
+				[
+					'tests/provider'
+				],
+				dest: '.',
+				options:
+				{
+					port: 1337
+				}
+			},
 			errorPermissionDenied:
 			{
 				src:
