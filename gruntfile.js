@@ -49,8 +49,8 @@ module.exports = grunt =>
 					'mirror {SOURCE} {TARGET} --reverse --dry-run',
 					'exit'
 				],
-				debug: false,
-				verbose: false,
+				debug: true,
+				verbose: true,
 				haltOnError: true
 			}
 		}
