@@ -124,11 +124,11 @@ function _process(source, target)
 	}
 	transferProcess.stderr.on('data', data =>
 	{
-		grunt.log.writeln(data);
+		grunt.log.errorlns(data);
 	});
 	transferProcess.on('close', code =>
 	{
-		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.fail.warn(source + ' !== ' + target);
+		code === 0 ? grunt.log.ok(source + ' > ' + target) : grunt.fatal(source + ' !== ' + target);
 	});
 }
 
