@@ -51,7 +51,7 @@ grunt.initConfig(
 				protocol: 'ftp',
 				host: null,
 				port: 21,
-				command:
+				commandArray:
 				[
 					'mirror {SOURCE} {TARGET} --reverse --delete-first --parallel=10 --use-pget-n=10',
 					'exit'
@@ -61,6 +61,7 @@ grunt.initConfig(
 				haltOnError: false,
 				errorArray:
 				[
+					'Connection refused',
 					'Not connected',
 					'Permission denied'
 				]

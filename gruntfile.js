@@ -17,7 +17,7 @@ module.exports = grunt =>
 				dest: '.',
 				options:
 				{
-					command:
+					commandArray:
 					[
 						'mirror {SOURCE} {TARGET} --reverse --dry-run',
 						'exit'
@@ -64,11 +64,6 @@ module.exports = grunt =>
 				protocol: 'sftp',
 				host: 'demo.wftpserver.com',
 				port: 2222,
-				command:
-				[
-					'mirror {SOURCE} {TARGET} --reverse',
-					'exit'
-				],
 				debug: true,
 				verbose: true,
 				haltOnError: true

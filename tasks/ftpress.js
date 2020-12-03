@@ -33,9 +33,9 @@ function _transfer(source, target)
 	{
 		transferArray.push('-p', option.get('port'));
 	}
-	if (option.get('command'))
+	if (option.get('commandArray'))
 	{
-		transferArray.push('-e', _parseCommand(option.get('command'), source, target));
+		transferArray.push('-e', _parseCommandArray(option.get('commandArray'), source, target));
 	}
 	if (option.get('debug') || option.get('haltOnError'))
 	{
@@ -45,22 +45,23 @@ function _transfer(source, target)
 }
 
 /**
- * parse command
+ * parse command array
  *
- * @since 1.3.0
+ * @since 2.0.0
  *
- * @param {string} command
+ * @param {Array} commandArray
  * @param {string} source
  * @param {string} target
  *
  * @return {string}
  */
 
-function _parseCommand(command, source, target)
+function _parseCommandArray(commandArray, source, target)
 {
 	const timestamp = new Date().getTime();
 
-	return command
+	return commandArray
+		.join(';')
 		.replace(new RegExp('{SOURCE}', 'g'), source)
 		.replace(new RegExp('{TARGET}', 'g'), target)
 		.replace(new RegExp('{TIMESTAMP}', 'g'), timestamp);
@@ -140,9 +141,9 @@ function _process(source, target)
 }
 
 /**
- * findError
+ * find error
  *
- * @since 1.6.0
+ * @since 2.0.0
  *
  * @param {string} dataValue
  *
@@ -183,13 +184,6 @@ function init()
 		...this.options(),
 		...helper.object.tidy(urlObject)
 	});
-
-	/* stringify command */
-
-	if (typeof option.get('command') === 'object')
-	{
-		option.set('command', option.get('command').join(';'));
-	}
 
 	/* process files */
 
